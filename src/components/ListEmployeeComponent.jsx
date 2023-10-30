@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link, matchPath } from 'react-router-dom';
 import EmployeeService from "../services/EmployeeService";
 
 class ListEmployeeComponent extends Component {
@@ -7,7 +7,7 @@ class ListEmployeeComponent extends Component {
         super(props);
     
         this.state = {
-        employees: []
+            employees: []
         };
     }
     
@@ -35,13 +35,16 @@ class ListEmployeeComponent extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.employees.map(employee => 
+                            {this.state.employees.map(employee => (
                                 <tr key={employee.id}>
                                     <td>{employee.firstName}</td>
                                     <td>{employee.lastName}</td>
                                     <td>{employee.emailId}</td>
+                                    <td>
+                                        <Link className="btn btn-info" to={`/employees/update/${employee.id}`}>Update</Link>
+                                    </td>
                                 </tr>
-                            )}
+                            ))}
                         </tbody>
                     </table>
                 </div>
@@ -49,5 +52,4 @@ class ListEmployeeComponent extends Component {
         );
     }
 }
-
 export default ListEmployeeComponent;
